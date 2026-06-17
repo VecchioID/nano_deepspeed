@@ -1,6 +1,7 @@
 """
 Generate slide deck for Chapter 2: DeepSpeed ZeRO
 """
+from pathlib import Path
 from pptx import Presentation
 from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
@@ -917,7 +918,7 @@ add_text_box(slide, Inches(1.5), Inches(5.0), Inches(10), Inches(0.5),
              "nano_training_framework · 大模型训练框架系统学习", font_size=16, color=C_TEXT)
 
 # Save
-output_path = "/home/robot/codes/ai_infra/nano_training_framework/pdf_output/02-DeepSpeed-ZeRO课件.pptx"
+output_path = str(Path(__file__).parent / "pdf_output" / "02-DeepSpeed-ZeRO课件.pptx")
 prs.save(output_path)
 print(f"Saved: {output_path}")
 print(f"Total slides: {len(prs.slides)}")

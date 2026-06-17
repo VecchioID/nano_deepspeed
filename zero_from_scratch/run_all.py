@@ -1,4 +1,9 @@
 import argparse
+import subprocess
+import sys
+from pathlib import Path
+
+BASE = Path(__file__).parent
 
 def main():
     parser = argparse.ArgumentParser()
@@ -6,27 +11,19 @@ def main():
     args = parser.parse_args()
 
     scripts = {
-        1: "part1_communicate.py",
-        2: "part2_zero1.py",
-        3: "part3_zero3.py",
-        4: "part4_mini_deepspeed.py",
-        5: "part5_multiprocess.py",
+        1: BASE / "part1_communicate.py",
+        2: BASE / "part2_zero1.py",
+        3: BASE / "part3_zero3.py",
+        4: BASE / "part4_mini_deepspeed.py",
+        5: BASE / "part5_multiprocess.py",
     }
 
+    script_path = scripts[args.part]
     print(f"\n{'='*60}")
-    print(f"运行 Part {args.part}: {scripts[args.part]}")
+    print(f"运行 Part {args.part}: {script_path.name}")
     print(f"{'='*60}\n")
 
-    # Run the script using exec
-    import importlib.util
-    import sys
-    spec = importlib.util.spec_from_file_location(
-        f"part{args.part}",
-        scripts[args.part]
-    )
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[f"part{args.part}"] = mod
-    spec.loader.exec_module(mod)
+    subprocess.run([sys.executable, str(script_path)], check=True)
 
 if __name__ == "__main__":
     main()

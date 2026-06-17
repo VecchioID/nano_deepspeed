@@ -2,7 +2,7 @@
 
 ## 环境检查
 
-本 lab 在单卡 NVIDIA Thor (132GB) 上运行，演示 DeepSpeed 的核心用法。
+本 lab 演示 DeepSpeed 的核心用法，请在配备 GPU 的机器上运行。
 
 ```bash
 python3 -c "
@@ -23,7 +23,7 @@ print(f'GPU memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f}
 ### 步骤
 
 ```bash
-cd ~/codes/ai_infra/nano_training_framework
+# 导航到项目根目录（请替换为您的实际路径）
 mkdir -p lab_output
 ```
 

@@ -12,7 +12,7 @@
 
 环境检查:
 ```bash
-cd ~/codes/ai_infra/nano_training_framework
+# 导航到项目根目录（请替换为您的实际路径）
 mkdir -p zero_from_scratch
 python -c "import torch; print(f'torch {torch.__version__}, cuda={torch.cuda.is_available()}')"
 ```
