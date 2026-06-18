@@ -15,6 +15,7 @@ output_dir.mkdir(exist_ok=True)
 
 # Files to convert (in order)
 md_files = [
+    base_dir / "00-深度学习训练基础与内存分析.md",
     base_dir / "01-LLM训练挑战与并行策略概览.md",
     base_dir / "02-DeepSpeed-ZeRO优化详解.md",
     base_dir / "03-DeepSpeed高级功能与实战.md",
