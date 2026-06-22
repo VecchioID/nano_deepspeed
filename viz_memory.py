@@ -15,14 +15,18 @@ OUTPUT.mkdir(exist_ok=True)
 import matplotlib.font_manager as fm
 _FONT_PATH = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
 if Path(_FONT_PATH).exists():
+    _prop = fm.FontProperties(fname=_FONT_PATH)
+    _FONT_NAME = _prop.get_name()
+    # 强制指定 SC 变体
+    if "CJK" in _FONT_NAME:
+        _FONT_NAME = "Noto Sans CJK SC"
     fm.fontManager.addfont(_FONT_PATH)
-    _FONT_NAME = fm.FontProperties(fname=_FONT_PATH).get_name()
 else:
     _FONT_NAME = "sans-serif"
 
 plt.rcParams.update({
     "font.family": "sans-serif",
-    "font.sans-serif": [_FONT_NAME, "DejaVu Sans"],
+    "font.sans-serif": [_FONT_NAME, "Noto Sans CJK SC", "Noto Sans CJK JP", "DejaVu Sans"],
     "font.size": 12,
     "axes.unicode_minus": False,
     "figure.dpi": 150,

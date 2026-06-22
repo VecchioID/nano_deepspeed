@@ -17,7 +17,8 @@
 ├──────────────────────────────────────┤
 │  参数:   Ψ × 2 bytes        (FP16)   │
 │  梯度:   Ψ × 2 bytes        (FP16)   │
-│  优化器:  Ψ × 4 × 2 bytes   (FP32)   │  ← momentum + variance + FP32参数
+│  优化器:  Ψ×4 + Ψ×4 = 8Ψ bytes (FP32 momentum + variance) │
+│  FP32主权重: Ψ × 4 bytes  (混合精度时额外维护)             │
 │  Activation: 取决于 batch size        │
 └──────────────────────────────────────┘
 ```

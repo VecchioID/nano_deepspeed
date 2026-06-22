@@ -109,7 +109,7 @@ class MoELayer(nn.Module):
 
             # 找到该 expert 对应的权重
             # 每个 token 可能有多个 expert, 取出对当前 expert 的权重
-            _, pos = (indices == expert_idx).max(dim=-1) # 在 k 个中的位置
+            pos = (indices[mask] == expert_idx).int().argmax(dim=-1)
             expert_weight = weights[mask, pos].unsqueeze(-1)  # (T_selected, 1)
 
             # 3. Expert 计算

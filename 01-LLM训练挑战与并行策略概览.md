@@ -214,7 +214,7 @@ GPU 2:       F₀ F₁ F₂ B₂ B₁ B₀
 - **更少的显存**是因为反向时立即释放 activation, 不需要保存所有 m 个 micro-batch 的中间结果
 
 ```
-1F1B 气泡比例 ≈ (p - 1) / m    (m >> p 时)
+1F1B 气泡比例 = (p - 1) / (m + p - 1)    (与 GPipe 相同，m >> p 时 ≈ (p-1)/m)
 ```
 
 **Interleaved 1F1B** (进一步降低气泡):
@@ -302,7 +302,7 @@ GPU 2:       F₀ F₁ F₂ B₂ B₁ B₀
 | TP (t 路) | 16Ψ/t | 每层 O(BSH) | 无 |
 | PP (p 段) | 16Ψ/p | 仅 activation 边界传递 | (p-1)/(m+p-1) |
 
-### 4.2 通信效率对比
+### 4.2 通信效率对比 (续)
 
 | 策略 | 通信模式 | 延迟敏感度 | 跨节点友好 | 扩展上限 |
 |------|---------|-----------|-----------|---------|
@@ -320,17 +320,17 @@ GPU 2:       F₀ F₁ F₂ B₂ B₁ B₀
 - **代价**: 约 20-30% 额外计算开销
 - **粒度**: 按层 checkpoint 最常用
 
-### 4.2 ZeRO (零冗余优化)
+### 4.4 ZeRO (零冗余优化)
 
 详见下一讲 [02-DeepSpeed ZeRO 优化详解](./02-DeepSpeed-ZeRO优化详解.md)
 
-### 4.3 Mixed Precision Training
+### 4.5 Mixed Precision Training
 
 - FP16/BF16 前向+反向，FP32 主权重更新
 - 显存减半，计算加速 2-4 倍
 - BF16 优于 FP16（无溢出问题，动态范围更大）
 
-### 4.4 Offloading
+### 4.6 Offloading
 
 - CPU/NVMe offloading of optimizer states
 - 训练超大模型时作为兜底策略
